@@ -29,7 +29,6 @@ window.onload = function () {
             matrixArray[row][col] = "color";
             matrixArray[row][inversCol] = "color";
         }
-        console.log(matrixArray);
     });
 
     document.body.insertBefore(grid, document.body.firstChild);
@@ -74,6 +73,16 @@ window.onload = function () {
     document.querySelector('.btnShow').addEventListener('click', function () {
         let selectedColor = getSelectedColor();
         updateMatrixInFirebase(selectedColor);
+
+        /*
+        var rootRef = firebase.database().ref();
+        var urlRef = rootRef.child("matrix");
+        urlRef.once("value", function (snapshot) {
+            snapshot.forEach(function (child) {
+                console.log(child.val());
+            });
+        });
+        */
     });
 
     /*
