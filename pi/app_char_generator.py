@@ -8,37 +8,43 @@ from firebase_admin import db
 cred = credentials.Certificate("charactergenerator-a88a7-firebase-adminsdk-d3wy6-81d801feb9.json")
 firebase = firebase_admin.initialize_app(cred,{'databaseURL':'https://charactergenerator-a88a7.firebaseio.com'})
 
+#init sensehat
 sense = SenseHat()
-sense.clear()
 
+currentMatrix = []
+currentColor = { 'r':0 , 'g':0 , 'b':0 }
 
 while True:
-    #firebase vars
+    #import firebase vars
     color = db.reference('/color').get()
+    matrix = db.reference('/matrix').get()
+    
+    #create vars from firebase imports
     r = color['r']
     g = color['g']
     b = color['b']
-    print(r)
-
-    matrix = db.reference('/matrix').get()
-    #print(matrix)
 
     #color lights
     col = 0
     row = 0
-    for Array in matrix:
-        for val in row:
-            if val == "color":
-                sense.set_pixel(row, col, r, g, b)
-            print(col)
-            col = col + 1
-            if col > 7:
-                col = 0
-        row = row + 1
-        if row > 7:
-            row = 0
-            
-    sleep(10)
+    if currentMatrix != matrix or currentColor != color:
+        sense.clear()
+        currentMatrix = matrix
+        currentColor = color
+        for Array in matrix:
+            for val in Array:
+                if val == "color":
+                    sense.set_pixel(row, col, r, g, b)
+                print(col)
+                col += 1
+                if col > 7:
+                    col = 0
+            row += 1
+            if row > 7:
+                row = 0
+     
+    #check every 3 seconds
+    sleep(3)
 
 
 
