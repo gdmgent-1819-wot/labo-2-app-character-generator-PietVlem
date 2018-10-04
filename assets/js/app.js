@@ -107,9 +107,7 @@ window.onload = function () {
     Firebase update
     */
     function updateMatrixInFirebase(color) {
-        firebase.database().ref().child('color').remove();
-        firebase.database().ref('color').push(color);
-        firebase.database().ref().child('matrix').remove();
-        firebase.database().ref('matrix').push(matrixArray);
+        firebase.database().ref('color').set(color);
+        firebase.database().ref('matrix').set(matrixArray);
     }
 }

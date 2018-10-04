@@ -24,12 +24,12 @@ while True:
     #print(matrix)
 
     #color lights
-    col = 0;
-    row = 0;
-    for row in matrix:
+    col = 0
+    row = 0
+    for Array in matrix:
         for val in row:
             if val == "color":
-                sense.set_pixel(row, col, int(r), int(g), int(b))
+                sense.set_pixel(row, col, r, g, b)
             print(col)
             col = col + 1
             if col > 7:
