@@ -36,7 +36,6 @@ while True:
             for val in Array:
                 if val == "color":
                     sense.set_pixel(row, col, r, g, b)
-                print(col)
                 col += 1
                 if col > 7:
                     col = 0
