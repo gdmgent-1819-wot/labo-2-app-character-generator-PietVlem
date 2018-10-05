@@ -14,7 +14,7 @@
 }
 
 .grid td.clicked {
-    background-color: yellow;
+    background-color: red;
 }
 
 .colorPickerWrapper, .btnShowWrapper{

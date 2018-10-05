@@ -1,14 +1,15 @@
 window.onload = function () {
     /*
+    Check if logged in
+    */
+    if (localStorage.getItem("loggedInUser") === null) {
+        window.location.replace("index.html");
+    }
+
+    /*
     Vars
     */
     let matrixArray;
-    let color;
-
-    /*
-    Get selected color
-    */
-    let colorOptions = document.querySelector('colorPicker');
 
     /*
     Create grid
@@ -52,6 +53,17 @@ window.onload = function () {
         }
         return grid;
     }
+
+    /*
+    Update color in matrix
+    */
+    const colorPicker = document.querySelector('#colorPicker');
+    colorPicker.addEventListener('change', function () {
+        var nodes = document.querySelectorAll('.grid td.clicked');
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].style.backgroundColor = colorPicker.options[colorPicker.selectedIndex].value;
+        }
+    })
 
     /*
     Create color matrix array
@@ -99,7 +111,7 @@ window.onload = function () {
             case 'green':
                 return { r: 0, g: 255, b: 0 }
             default:
-                return { r: 255, g: 0, b: 255 }
+                return { r: 255, g: 255, b: 0 }
         }
     }
 

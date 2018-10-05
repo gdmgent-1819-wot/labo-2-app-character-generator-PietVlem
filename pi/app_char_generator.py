@@ -38,7 +38,7 @@ while True:
         if row > 7:
             row = 0
             
-    sleep(10)
+    sleep(1)
 
 
 
